@@ -59,5 +59,14 @@ function draw() {
 function keyPressed() {
   if (key === 's' || key === 'S') {
     save("monosus-block.svg");
+  } else if (key === 'r' || key === 'R') {
+    generateOctagonPoints();
+  }
+}
+
+function mousePressed() {
+  // マウス位置がキャンバス内かどうか確認
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+    generateOctagonPoints();
   }
 }

@@ -15,22 +15,25 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      font-family: Helvetica, Arial, sans-serif;
+      color: #333;
     }
     canvas {
       display: block;
       margin: 0 auto;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    p {
+    .instruction {
       position: absolute;
-      top: 20px;
-      left: 20px;
-      font-family: Helvetica, Arial, sans-serif;
-      color: #333;
+      top: 1rem;
+      left: 1rem;
+      user-select: none;
     }
   </style>
 </head>
 <body>
-  <p>Press S to download as SVG</p>
+  <div class="instruction">
+    <p>Click Shape or Press R to Generate</p>
+    <p>Press S to download as SVG</p>
+  </div>
 </body>
 </html>
