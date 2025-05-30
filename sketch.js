@@ -59,14 +59,44 @@ function draw() {
 function keyPressed() {
   if (key === 's' || key === 'S') {
     save("monosus-block.svg");
+  } else if (key === 'p' || key === 'P') {
+    savePNG();
   } else if (key === 'r' || key === 'R') {
     generateOctagonPoints();
   }
 }
 
-function mousePressed() {
-  // マウス位置がキャンバス内かどうか確認
-  if (mouseX >= 0 && mouseX <= width && mouseY >= 0 && mouseY <= height) {
+function savePNG() {
+  // キャンバスからPNGデータを取得
+  let canvas = document.querySelector('canvas');
+  if (!canvas) {
+    // SVGモードの場合、一時的なキャンバスを作成して描画
+    canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+    let ctx = canvas.getContext('2d');
+    
+    ctx.clearRect(0, 0, width, height);
+    ctx.fillStyle = '#FF5C8D';
+    ctx.beginPath();
+    ctx.moveTo(points[0].x, points[0].y);
+    for (let i = 1; i < points.length; i++) {
+      ctx.lineTo(points[i].x, points[i].y);
+    }
+    ctx.closePath();
+    ctx.fill();
+  }  
+  let link = document.createElement('a');
+  link.download = 'monosus-block.png';
+  link.href = canvas.toDataURL('image/png');
+  link.click();
+}
+
+function mouseReleased() {
+  if (mouseButton === LEFT && 
+      mouseX >= 0 && mouseX <= width && 
+      mouseY >= 0 && mouseY <= height) {
     generateOctagonPoints();
   }
+  return false;
 }
